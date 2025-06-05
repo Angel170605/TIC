@@ -1,0 +1,10 @@
+<h11>Hello World</h1>
+
+    <h1>{{ user.username }}</h1>
+    <img src="{{ user.profile.avatar.url }}">
+
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'signup' %}">Sign up</a>
+
+
