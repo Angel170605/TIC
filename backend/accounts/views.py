@@ -58,7 +58,7 @@ def edit_profile(request):
     profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
         if (form := EditProfileForm(request.POST, request.FILES, instance=profile)).is_valid():
-            p = form.save()
+            form.save()
             return redirect('shop:home')
     else:
         form = EditProfileForm(instance=profile)

@@ -1,15 +1,22 @@
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.IntegerField()
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    price = models.IntegerField(default=0)
+    stock = models.IntegerField(default=0)
     stock_img = models.ImageField(upload_to='products', default='profiles/default.png')
 
     def __str__(self):
-        return
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 
 class Cart(models.Model):
@@ -28,3 +35,6 @@ class CartProduct(models.Model):
     description = models.TextField()
     input_text = models.CharField(max_length=250, blank=True, null=True)
     input_image = models.ImageField(upload_to='users_input_images', default='profiles/default.png', blank=True, null=True)
+
+    def __str__(self):
+        return self.product.name

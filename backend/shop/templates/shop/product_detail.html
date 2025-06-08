@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p>{{ product.name }}</p>
+
+<img src="{{ product.stock_img.url }}" style="width: 200px;">
+{% endblock  %}
